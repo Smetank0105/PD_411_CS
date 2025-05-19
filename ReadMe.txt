@@ -1,7 +1,13 @@
 ﻿https://github.com/okovtun/PD_411_CS.git
 https://www.youtube.com/playlist?list=PLeqyOOqxeiINOiKYh0YejB9GISCy2h6oT
 
+TOREAD:
+https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%BD%D0%B3%D0%B5%D1%80%D1%81%D0%BA%D0%B0%D1%8F_%D0%BD%D0%BE%D1%82%D0%B0%D1%86%D0%B8%D1%8F
+
 TODO:
+1. В иерархию классов 'Academy' добаввить класс 'Graduate' - Дипломник и 'Specialist';
+
+DONE:
 1. В классе 'Point' написать оператор '-', который возвращает расстояние между двумя точками;
 2. В Solution 'OOP' добавить проект 'Fraction', и в нем реализовать класс 'Fraction', который
    описывает простую дробь. В классе реализовать все необходимые методы и операторы;
