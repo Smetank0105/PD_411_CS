@@ -40,6 +40,19 @@ namespace Academy
 			this.Attendance = other.Attendance;
 			Console.WriteLine($"SCopyConstructor\t:{this.GetHashCode()}");
 		}
+		public Student(string[] str) : base(str)
+		{
+			if (str.Length >= 8)
+			{
+				Speciality = str[4];
+				Group = str[5];
+				Rating = Convert.ToDouble(str[6]);
+				Attendance = Convert.ToDouble(str[7]);
+				Console.WriteLine($"SConstructor\t:{this.GetHashCode()}");
+			}
+			else
+				throw new ArgumentException("Ошибка чтения из файла");
+		}
 		~Student()
 		{
 			Console.WriteLine($"SDestructor\t:{this.GetHashCode()}");
@@ -51,7 +64,12 @@ namespace Academy
 		}
 		public override string ToString()
 		{
-			return base.ToString() + $", {Speciality} {Group} {Rating} {Attendance}";
+			return base.ToString() 
+				+ $"{Speciality.PadRight(25)}{Group.PadRight(8)}{Rating.ToString().PadRight(8)}{Attendance.ToString().PadRight(8)}";
+		}
+		public override string ToFileString()
+		{
+			return base.ToFileString() + $",{Speciality},{Group},{Rating},{Attendance}";
 		}
 	}
 }

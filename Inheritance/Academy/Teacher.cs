@@ -20,6 +20,17 @@ namespace Academy
 			Experience = experience;
 			Console.WriteLine($"TConstructor: {this.GetHashCode()}");
 		}
+		public Teacher(string[] str):base(str)
+		{
+			if (str.Length >= 6)
+			{
+				Speciality = str[4];
+				Experience = Convert.ToDouble(str[5]);
+				Console.WriteLine($"TConstructor:\t{this.GetHashCode()}");
+			}
+			else
+				throw new ArgumentException("Ошибка чтения из файла");
+		}
 		~Teacher()
 		{
 			Console.WriteLine($"TDestructor: {this.GetHashCode()}");
@@ -32,7 +43,11 @@ namespace Academy
 		}
 		public override string ToString()
 		{
-			return base.ToString() + $", {Speciality} {Experience}";
+			return base.ToString() + $"{Speciality.PadRight(25)}{Experience.ToString().PadRight(8)}";
+		}
+		public override string ToFileString()
+		{
+			return base.ToFileString() + $",{Speciality},{Experience}";
 		}
 	}
 }

@@ -23,6 +23,16 @@ namespace Academy
 			Subject = subject;
 			Console.WriteLine($"GConstructor\t:{this.GetHashCode()}");
 		}
+		public Graduate(string[] str) : base(str)
+		{
+			if (str.Length >= 9)
+			{
+				Subject = str[8];
+				Console.WriteLine($"GConstructor\t:{this.GetHashCode()}");
+			}
+			else
+				throw new ArgumentException("Ошибка чтения из файла");
+		}
 		~Graduate()
 		{
 			Console.WriteLine($"GDestructor\t:{this.GetHashCode()}");
@@ -34,7 +44,11 @@ namespace Academy
 		}
 		public override string ToString()
 		{
-			return base.ToString() + $", {Subject}";
+			return base.ToString() + Subject.PadRight(25);
+		}
+		public override string ToFileString()
+		{
+			return base.ToFileString() + $",{Subject}";
 		}
 	}
 }

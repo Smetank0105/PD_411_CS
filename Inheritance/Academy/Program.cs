@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;    //Input/Output
+using System.Diagnostics;
 
 namespace Academy
 {
@@ -51,14 +53,65 @@ namespace Academy
 					new Graduate("Schreder", "Hank", 40, "Criminalistic", "OBN", 70, 80, "How to catch Heizenberg"),
 					new Teacher("Diaz", "Ricardo", 50, "Weapons distribution", 20)
 				};
+			Console.WriteLine();
 			//Specialisation(Уточнение):
-			Console.WriteLine(delimiter);
 			for(int i = 0; i < group.Length; i++)
 			{
 				Console.WriteLine(group[i]);
 				//group[i].Info();
-				Console.WriteLine(delimiter);
+				//Console.WriteLine(delimiter);
 			}
+			Console.WriteLine(delimiter);
+
+			StreamWriter sw = new StreamWriter("Group.txt");    //Создаем и открываем поток
+
+			for(int i = 0; i < group.Length; i++)
+			{
+				sw.WriteLine(group[i].ToFileString());
+			}
+
+			sw.Close(); //Потоки обязательно нужно закрывать!!!
+
+			Process.Start("notepad.exe","Group.txt");
+
+			//CSV - Comma Separated Values (значения, разделенные запятой)
+
+			List <Human> groupList = new List<Human>();
+			StreamReader sr = new StreamReader("Group.txt");
+			while(!sr.EndOfStream)
+			{
+				string line = sr.ReadLine();
+				string[] str = line.Split(',');
+				switch (str[0])
+				{
+					case "Human":
+						//Console.WriteLine("Human");
+						groupList.Add(new Human(str));
+						break;
+					case "Teacher":
+						groupList.Add(new Teacher(str));
+						//Console.WriteLine("Teacher");
+						break;
+					case "Student":
+						groupList.Add(new Student(str));
+						//Console.WriteLine("Student");
+						break;
+					case "Graduate":
+						groupList.Add(new Graduate(str));
+						//Console.WriteLine("Graduate");
+						break;
+					default:
+						break;
+				}
+			}
+			sr.Close();
+
+			Console.WriteLine();
+			for(int i = 0; i < groupList.Count; i++)
+			{
+				Console.WriteLine(groupList[i]);
+			}
+			Console.WriteLine(delimiter);
 		}
 	}
 }
