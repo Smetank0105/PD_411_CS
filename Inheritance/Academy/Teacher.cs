@@ -25,10 +25,14 @@ namespace Academy
 			Console.WriteLine($"TDestructor: {this.GetHashCode()}");
 		}
 
-		public void Info()
+		public override void Info()
 		{
 			base.Info();
 			Console.WriteLine($"{Speciality} {Experience}");
+		}
+		public override string ToString()
+		{
+			return base.ToString() + $", {Speciality} {Experience}";
 		}
 	}
 }
