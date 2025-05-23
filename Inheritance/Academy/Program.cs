@@ -82,27 +82,7 @@ namespace Academy
 			{
 				string line = sr.ReadLine();
 				string[] str = line.Split(',');
-				switch (str[0])
-				{
-					case "Human":
-						//Console.WriteLine("Human");
-						groupList.Add(new Human(str));
-						break;
-					case "Teacher":
-						groupList.Add(new Teacher(str));
-						//Console.WriteLine("Teacher");
-						break;
-					case "Student":
-						groupList.Add(new Student(str));
-						//Console.WriteLine("Student");
-						break;
-					case "Graduate":
-						groupList.Add(new Graduate(str));
-						//Console.WriteLine("Graduate");
-						break;
-					default:
-						break;
-				}
+				groupList.Add(HumanFactory(str));
 			}
 			sr.Close();
 
@@ -112,6 +92,18 @@ namespace Academy
 				Console.WriteLine(groupList[i]);
 			}
 			Console.WriteLine(delimiter);
+		}
+		public static Human HumanFactory(string[] str)
+		{
+			Human human = null;
+			switch (str[0])
+			{
+				case "Human": human = new Human(str); break;
+				case "Student": human = new Student(str); break;
+				case "Graduate": human = new Graduate(str); break;
+				case "Teacher": human = new Teacher(str); break;
+			}
+			return human;
 		}
 	}
 }
