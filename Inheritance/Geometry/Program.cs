@@ -21,9 +21,15 @@ namespace Geometry
 			square.Info();
 			square.Draw(graphics,400,10);
 			Console.WriteLine();
+
 			Circle circle = new Circle(25, Color.Green);
 			circle.Draw(graphics, 500, 10);
 			circle.Info();
+			Console.WriteLine();
+
+			Triangle triangle = new Triangle(new Point(0, 0), new Point(50, 0), new Point(0, 50), Color.Blue);
+			triangle.Draw(graphics, 600, 10);
+			triangle.Info();
 			Console.WriteLine();
 
 		}
