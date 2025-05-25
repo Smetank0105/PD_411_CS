@@ -32,6 +32,10 @@ namespace Geometry
 			triangle.Info();
 			Console.WriteLine();
 
+			Rectangle rectangle = new Rectangle(75,50,Color.Yellow);
+			rectangle.Draw(graphics, 700, 10);
+			rectangle.Info();
+			Console.WriteLine();
 		}
 		[DllImport("kernel32.dll")]
 		public static extern IntPtr GetConsoleWindow();

@@ -36,7 +36,7 @@ namespace Geometry
 		}
 		public override void Draw(Graphics graphics, int x, int y)
 		{
-			Rectangle window_rect = new Rectangle
+			System.Drawing.Rectangle window_rect = new System.Drawing.Rectangle
 				(
 					Console.WindowLeft, Console.WindowTop,
 					Console.WindowWidth, Console.WindowHeight

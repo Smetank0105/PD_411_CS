@@ -8,31 +8,32 @@ using System.Windows.Forms;
 
 namespace Geometry
 {
-	class Square:Shape
+	class Rectangle:Shape
 	{
-		double side;
-		public double Side
+		double sideX;
+		double sideY;
+		public double SideX
 		{
-			get
-			{
-				return side;
-			}
-			set
-			{
-				if (value > 0) side = value;
-			}
+			get { return sideX; }
+			set { if (value > 0) sideX = value; }
 		}
-		public Square(double side, Color color):base(color)
+		public double SideY
 		{
-			Side = side;
+			get { return sideY; }
+			set { if (value > 0) sideY = value; }
+		}
+		public Rectangle(double sideX, double sideY, Color color) : base(color)
+		{
+			SideX = sideX;
+			SideY = sideY;
 		}
 		public override double GetArea()
 		{
-			return Side * Side;
+			return SideX * SideY;
 		}
 		public override double GetPerimeter()
 		{
-			return Side * 4;
+			return (SideX + SideY) * 2;
 		}
 		public override void Draw(Graphics graphics, int x, int y)
 		{
@@ -42,11 +43,11 @@ namespace Geometry
 					Console.WindowWidth, Console.WindowHeight
 				);
 			PaintEventArgs e = new PaintEventArgs(graphics, window_rect);
-			e.Graphics.DrawRectangle(new Pen(Color, 2), x, y, (int)Side, (int)Side);
+			e.Graphics.DrawRectangle(new Pen(Color, 2), x, y, (int)SideX, (int)SideY);
 		}
 		public override void Info()
 		{
-			Console.WriteLine($"Длина стороны: {Side}");
+			Console.WriteLine($"Длина сторон: A[{SideX}], B[{SideY}]");
 			base.Info();
 		}
 	}

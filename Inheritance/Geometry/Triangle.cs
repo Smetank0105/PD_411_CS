@@ -28,11 +28,11 @@ namespace Geometry
 			get { return pointC; }
 			set { pointC = value; }
 		}
-		public Triangle(Point pointA, Point pointB, Point pointC, Color color) : base(color)
+		public Triangle(Point pA, Point pB, Point pC, Color color) : base(color)
 		{
-			PointA = pointA;
-			PointB = pointB;
-			PointC = pointC;
+			PointA = pA;
+			PointB = pB;
+			PointC = pC;
 		}
 		public override double GetArea()
 		{
@@ -53,7 +53,7 @@ namespace Geometry
 		}
 		public override void Draw(Graphics graphics, int x, int y)
 		{
-			Rectangle window_rect = new Rectangle
+			System.Drawing.Rectangle window_rect = new System.Drawing.Rectangle
 				(
 					Console.WindowLeft, Console.WindowTop,
 					Console.WindowWidth, Console.WindowHeight
