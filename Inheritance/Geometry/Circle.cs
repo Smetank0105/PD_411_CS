@@ -8,31 +8,31 @@ using System.Windows.Forms;
 
 namespace Geometry
 {
-	class Square:Shape
+	class Circle:Shape
 	{
-		double side;
-		public double Side
+		double radius;
+		public double Radius
 		{
 			get
 			{
-				return side;
+				return radius;
 			}
 			set
 			{
-				if (value > 0) side = value;
+				if (value > 0) radius = value;
 			}
 		}
-		public Square(double side, Color color):base(color)
+		public Circle(double radius, Color color):base(color)
 		{
-			Side = side;
+			Radius = radius;
 		}
 		public override double GetArea()
 		{
-			return Side * Side;
+			return Radius * Radius * Math.PI;
 		}
 		public override double GetPerimeter()
 		{
-			return Side * 4;
+			return 2 * Radius * Math.PI;
 		}
 		public override void Draw(Graphics graphics, int x, int y)
 		{
@@ -42,11 +42,11 @@ namespace Geometry
 					Console.WindowWidth, Console.WindowHeight
 				);
 			PaintEventArgs e = new PaintEventArgs(graphics, window_rect);
-			e.Graphics.DrawRectangle(new Pen(Color, 2), x, y, (int)Side, (int)Side);
+			e.Graphics.DrawEllipse(new Pen(Color, 2), x, y, (int)Radius*2,(int)Radius*2);
 		}
 		public override void Info()
 		{
-			Console.WriteLine($"Длина стороны: {Side}");
+			Console.WriteLine($"Радиус: {Radius}");
 			base.Info();
 		}
 	}

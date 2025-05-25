@@ -15,16 +15,17 @@ namespace Geometry
 		{
 			IntPtr hwnd = GetConsoleWindow();
 			Graphics graphics = Graphics.FromHwnd(hwnd);
-			Rectangle window_rect = new Rectangle
-				(
-				Console.WindowLeft, Console.WindowTop,
-				Console.WindowWidth, Console.WindowHeight
-				);
-			PaintEventArgs e = new PaintEventArgs(graphics, window_rect);
-			e.Graphics.DrawRectangle(new Pen(Color.Red, 2), 400, 100, 100, 100);
+
 			//Shape shape = new Shape(); //Невозможно создать экземпляр абстрактного класса
-			Square square = new Square(10,Color.Red);
+			Square square = new Square(50, Color.Red);
 			square.Info();
+			square.Draw(graphics,400,10);
+			Console.WriteLine();
+			Circle circle = new Circle(25, Color.Green);
+			circle.Draw(graphics, 500, 10);
+			circle.Info();
+			Console.WriteLine();
+
 		}
 		[DllImport("kernel32.dll")]
 		public static extern IntPtr GetConsoleWindow();

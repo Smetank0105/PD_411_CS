@@ -17,12 +17,11 @@ namespace Geometry
 		}
 		public abstract double GetArea();
 		public abstract double GetPerimeter();
-		public abstract void Draw();
+		public abstract void Draw(Graphics graphics, int x, int y);
 		public virtual void Info()
 		{
 			Console.WriteLine($"Площадь фигуры: {GetArea()}");
 			Console.WriteLine($"Периметр фигуры: {GetPerimeter()}");
-			Draw();
 		}
 	}
 }
