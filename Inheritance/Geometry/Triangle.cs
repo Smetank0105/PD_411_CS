@@ -28,7 +28,8 @@ namespace Geometry
 			get { return pointC; }
 			set { pointC = value; }
 		}
-		public Triangle(Point pA, Point pB, Point pC, Color color) : base(color)
+		public Triangle(Point pA, Point pB, Point pC, int start_x, int start_y, int line_width, Color color) 
+			: base(start_x, start_y, line_width, color)
 		{
 			PointA = pA;
 			PointB = pB;
@@ -51,24 +52,20 @@ namespace Geometry
 			sideCA = Math.Sqrt(Math.Pow(PointA.X - PointC.X, 2) + Math.Pow(PointA.Y - PointC.Y, 2));
 			return sideAB + sideBC + sideCA; ;
 		}
-		public override void Draw(Graphics graphics, int x, int y)
+		public override void Draw(PaintEventArgs e)
 		{
-			System.Drawing.Rectangle window_rect = new System.Drawing.Rectangle
-				(
-					Console.WindowLeft, Console.WindowTop,
-					Console.WindowWidth, Console.WindowHeight
-				);
-			PaintEventArgs e = new PaintEventArgs(graphics, window_rect);
-			Point pA = new Point(PointA.X+x,PointA.Y+y);
-			Point pB = new Point(PointB.X+x,PointB.Y+y);
-			Point pC = new Point(PointC.X+x,PointC.Y+y);
+			Point pA = new Point(PointA.X + StartX, PointA.Y + StartY);
+			Point pB = new Point(PointB.X + StartX, PointB.Y + StartY);
+			Point pC = new Point(PointC.X + StartX, PointC.Y + StartY);
 			Point[] points = new Point[] { pA, pB, pC };
-			e.Graphics.DrawPolygon(new Pen(Color, 2), points);
+			Pen pen = new Pen(Color, LineWidth);
+			e.Graphics.DrawPolygon(pen, points);
 		}
-		public override void Info()
+		public override void Info(PaintEventArgs e)
 		{
+			Console.WriteLine(GetType());
 			Console.WriteLine($"Вершины: A{PointA}, B{PointB}, C{PointC}");
-			base.Info();
+			base.Info(e);
 		}
 	}
 }

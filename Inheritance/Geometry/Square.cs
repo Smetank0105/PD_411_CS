@@ -1,4 +1,5 @@
-﻿using System;
+﻿//#define SQUARE_FIRST
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,21 +9,17 @@ using System.Windows.Forms;
 
 namespace Geometry
 {
-	class Square:Shape
+#if SQUARE_FIRST
+	class Square : Shape
 	{
 		double side;
 		public double Side
 		{
-			get
-			{
-				return side;
-			}
-			set
-			{
-				if (value > 0) side = value;
-			}
+			get => side;
+			set => side = value < MIN_SIZE ? MIN_SIZE : value > MAX_SIZE ? MAX_SIZE : value;
 		}
-		public Square(double side, Color color):base(color)
+		public Square(double side, int start_x, int start_y, int line_width, Color color)
+			: base(start_x, start_y, line_width, color)
 		{
 			Side = side;
 		}
@@ -34,20 +31,24 @@ namespace Geometry
 		{
 			return Side * 4;
 		}
-		public override void Draw(Graphics graphics, int x, int y)
+		public override void Draw(PaintEventArgs e)
 		{
-			System.Drawing.Rectangle window_rect = new System.Drawing.Rectangle
-				(
-					Console.WindowLeft, Console.WindowTop,
-					Console.WindowWidth, Console.WindowHeight
-				);
-			PaintEventArgs e = new PaintEventArgs(graphics, window_rect);
-			e.Graphics.DrawRectangle(new Pen(Color, 2), x, y, (int)Side, (int)Side);
+			Pen pen = new Pen(Color, LineWidth);
+			e.Graphics.DrawRectangle(pen, StartX, StartY, (float)Side, (float)Side);
 		}
-		public override void Info()
+		public override void Info(PaintEventArgs e)
 		{
+			Console.WriteLine(GetType());
 			Console.WriteLine($"Длина стороны: {Side}");
-			base.Info();
+			base.Info(e);
 		}
+	} 
+#endif
+
+	class Square : Rectangle
+	{
+		public Square(double side, int start_x, int start_y, int line_width, Color color)
+			: base(side, side, start_x, start_y, line_width, color) { }
 	}
+
 }

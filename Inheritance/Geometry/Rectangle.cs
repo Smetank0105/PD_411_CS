@@ -14,15 +14,16 @@ namespace Geometry
 		double sideY;
 		public double SideX
 		{
-			get { return sideX; }
-			set { if (value > 0) sideX = value; }
+			get => sideX;
+			set => sideX = value < MIN_SIZE ? MIN_SIZE : value > MAX_SIZE ? MAX_SIZE : value;
 		}
 		public double SideY
 		{
-			get { return sideY; }
-			set { if (value > 0) sideY = value; }
+			get => sideY;
+			set => sideY = value < MIN_SIZE ? MIN_SIZE : value > MAX_SIZE ? MAX_SIZE : value;
 		}
-		public Rectangle(double sideX, double sideY, Color color) : base(color)
+		public Rectangle(double sideX, double sideY, int start_x, int start_y, int line_width, Color color) 
+			: base(start_x, start_y, line_width, color)
 		{
 			SideX = sideX;
 			SideY = sideY;
@@ -35,20 +36,16 @@ namespace Geometry
 		{
 			return (SideX + SideY) * 2;
 		}
-		public override void Draw(Graphics graphics, int x, int y)
+		public override void Draw(PaintEventArgs e)
 		{
-			System.Drawing.Rectangle window_rect = new System.Drawing.Rectangle
-				(
-					Console.WindowLeft, Console.WindowTop,
-					Console.WindowWidth, Console.WindowHeight
-				);
-			PaintEventArgs e = new PaintEventArgs(graphics, window_rect);
-			e.Graphics.DrawRectangle(new Pen(Color, 2), x, y, (int)SideX, (int)SideY);
+			Pen pen = new Pen(Color, LineWidth);
+			e.Graphics.DrawRectangle(pen, StartX, StartY, (float)SideX, (float)SideY);
 		}
-		public override void Info()
+		public override void Info(PaintEventArgs e)
 		{
+			Console.WriteLine(GetType());
 			Console.WriteLine($"Длина сторон: A[{SideX}], B[{SideY}]");
-			base.Info();
+			base.Info(e);
 		}
 	}
 }

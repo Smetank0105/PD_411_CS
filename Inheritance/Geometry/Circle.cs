@@ -13,16 +13,11 @@ namespace Geometry
 		double radius;
 		public double Radius
 		{
-			get
-			{
-				return radius;
-			}
-			set
-			{
-				if (value > 0) radius = value;
-			}
+			get => radius;
+			set => radius = value < MIN_SIZE/2 ? MIN_SIZE/2 : value > MAX_SIZE/2 ? MAX_SIZE/2 : value;
 		}
-		public Circle(double radius, Color color):base(color)
+		public Circle(double radius, int start_x, int start_y, int line_width, Color color)
+			:base(start_x, start_y, line_width, color)
 		{
 			Radius = radius;
 		}
@@ -34,20 +29,16 @@ namespace Geometry
 		{
 			return 2 * Radius * Math.PI;
 		}
-		public override void Draw(Graphics graphics, int x, int y)
+		public override void Draw(PaintEventArgs e)
 		{
-			System.Drawing.Rectangle window_rect = new System.Drawing.Rectangle
-				(
-					Console.WindowLeft, Console.WindowTop,
-					Console.WindowWidth, Console.WindowHeight
-				);
-			PaintEventArgs e = new PaintEventArgs(graphics, window_rect);
-			e.Graphics.DrawEllipse(new Pen(Color, 2), x, y, (int)Radius*2,(int)Radius*2);
+			Pen pen = new Pen(Color, LineWidth);
+			e.Graphics.DrawEllipse(pen, StartX, StartY, (float)Radius*2,(float)Radius*2);
 		}
-		public override void Info()
+		public override void Info(PaintEventArgs e)
 		{
+			Console.WriteLine(GetType());
 			Console.WriteLine($"Радиус: {Radius}");
-			base.Info();
+			base.Info(e);
 		}
 	}
 }
