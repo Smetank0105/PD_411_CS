@@ -16,6 +16,7 @@ namespace Geometry
 			get => radius;
 			set => radius = value < MIN_SIZE/2 ? MIN_SIZE/2 : value > MAX_SIZE/2 ? MAX_SIZE/2 : value;
 		}
+		public Circle(int start_x, int start_y, int line_width, Color color) : base(start_x, start_y, line_width, color) { }
 		public Circle(double radius, int start_x, int start_y, int line_width, Color color)
 			:base(start_x, start_y, line_width, color)
 		{
@@ -39,6 +40,11 @@ namespace Geometry
 			Console.WriteLine(GetType());
 			Console.WriteLine($"Радиус: {Radius}");
 			base.Info(e);
+		}
+		public override void InitRandom(Random rnd)
+		{
+			base.InitRandom(rnd);
+			Radius=rnd.NextDouble()* ((double)MAX_SIZE/2 - (double)MIN_SIZE/2) + (double)MIN_SIZE/2;
 		}
 	}
 }

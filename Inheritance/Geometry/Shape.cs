@@ -19,7 +19,7 @@ namespace Geometry
 		static readonly int MAX_LINE_WIDTH = 10;
 
 		protected static readonly int MIN_SIZE = 50;
-		protected static readonly int MAX_SIZE = 850;
+		protected static readonly int MAX_SIZE = 150;
 
 		int start_x;
 		int start_y;
@@ -55,6 +55,11 @@ namespace Geometry
 			Console.WriteLine($"Площадь фигуры: {GetArea()}");
 			Console.WriteLine($"Периметр фигуры: {GetPerimeter()}");
 			Draw(e);
+		}
+		public virtual void InitRandom(Random rnd)
+		{
+			LineWidth = rnd.Next(MIN_LINE_WIDTH, MAX_LINE_WIDTH);
+			Color = Color.FromArgb(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255));
 		}
 	}
 }

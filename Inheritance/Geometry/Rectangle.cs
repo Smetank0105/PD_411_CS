@@ -22,6 +22,7 @@ namespace Geometry
 			get => sideY;
 			set => sideY = value < MIN_SIZE ? MIN_SIZE : value > MAX_SIZE ? MAX_SIZE : value;
 		}
+		public Rectangle(int start_x, int start_y, int line_width, Color color) : base(start_x, start_y, line_width, color) { }
 		public Rectangle(double sideX, double sideY, int start_x, int start_y, int line_width, Color color) 
 			: base(start_x, start_y, line_width, color)
 		{
@@ -46,6 +47,12 @@ namespace Geometry
 			Console.WriteLine(GetType());
 			Console.WriteLine($"Длина сторон: A[{SideX}], B[{SideY}]");
 			base.Info(e);
+		}
+		public override void InitRandom(Random rnd)
+		{
+			base.InitRandom(rnd);
+			SideX = rnd.NextDouble()*((double)MAX_SIZE-(double)MIN_SIZE)+(double)MIN_SIZE;
+			SideY = rnd.NextDouble()*((double)MAX_SIZE-(double)MIN_SIZE)+(double)MIN_SIZE;
 		}
 	}
 }
