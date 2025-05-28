@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Geometry
 {
-	class Rectangle:Shape
+	class Rectangle:Shape, IHaveDiagonal
 	{
 		double sideX;
 		double sideY;
@@ -28,6 +28,10 @@ namespace Geometry
 			SideX = sideX;
 			SideY = sideY;
 		}
+		public double GetDiagonal()
+		{
+			return Math.Sqrt(Math.Pow(SideX,2)+Math.Pow(SideY,2));
+		}
 		public override double GetArea()
 		{
 			return SideX * SideY;
@@ -45,6 +49,7 @@ namespace Geometry
 		{
 			Console.WriteLine(GetType());
 			Console.WriteLine($"Длина сторон: A[{SideX}], B[{SideY}]");
+			Console.WriteLine($"Диагональ: {GetDiagonal()}");
 			base.Info(e);
 		}
 	}

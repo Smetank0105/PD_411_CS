@@ -8,63 +8,14 @@ using System.Windows.Forms;
 
 namespace Geometry
 {
-	class Triangle : Shape
+	abstract class Triangle : Shape
 	{
-		Point pointA;
-		Point pointB;
-		Point pointC;
-		public Point PointA
-		{
-			get { return pointA; }
-			set { pointA = value; }
-		}
-		public Point PointB
-		{
-			get { return pointB; }
-			set { pointB = value; }
-		}
-		public Point PointC
-		{
-			get { return pointC; }
-			set { pointC = value; }
-		}
-		public Triangle(Point pA, Point pB, Point pC, int start_x, int start_y, int line_width, Color color) 
-			: base(start_x, start_y, line_width, color)
-		{
-			PointA = pA;
-			PointB = pB;
-			PointC = pC;
-		}
-		public override double GetArea()
-		{
-			double sideAB, sideBC, sideCA, p;
-			sideAB = Math.Sqrt(Math.Pow(PointB.X-PointA.X,2)+Math.Pow(PointB.Y-PointA.Y,2));
-			sideBC = Math.Sqrt(Math.Pow(PointC.X-PointB.X,2)+Math.Pow(PointC.Y-PointB.Y,2));
-			sideCA = Math.Sqrt(Math.Pow(PointA.X-PointC.X,2)+Math.Pow(PointA.Y-PointC.Y,2));
-			p = (sideAB + sideBC + sideCA) / 2;
-;			return Math.Sqrt(p*(p-sideAB)*(p-sideBC)*(p-sideCA));
-		}
-		public override double GetPerimeter()
-		{
-			double sideAB, sideBC, sideCA;
-			sideAB = Math.Sqrt(Math.Pow(PointB.X - PointA.X, 2) + Math.Pow(PointB.Y - PointA.Y, 2));
-			sideBC = Math.Sqrt(Math.Pow(PointC.X - PointB.X, 2) + Math.Pow(PointC.Y - PointB.Y, 2));
-			sideCA = Math.Sqrt(Math.Pow(PointA.X - PointC.X, 2) + Math.Pow(PointA.Y - PointC.Y, 2));
-			return sideAB + sideBC + sideCA; ;
-		}
-		public override void Draw(PaintEventArgs e)
-		{
-			Point pA = new Point(PointA.X + StartX, PointA.Y + StartY);
-			Point pB = new Point(PointB.X + StartX, PointB.Y + StartY);
-			Point pC = new Point(PointC.X + StartX, PointC.Y + StartY);
-			Point[] points = new Point[] { pA, pB, pC };
-			Pen pen = new Pen(Color, LineWidth);
-			e.Graphics.DrawPolygon(pen, points);
-		}
+		public abstract double GetHeight();
+		protected Triangle(int start_x, int start_y, int line_width, Color color)
+			: base(start_x, start_y, line_width, color) { }
 		public override void Info(PaintEventArgs e)
 		{
 			Console.WriteLine(GetType());
-			Console.WriteLine($"Вершины: A{PointA}, B{PointB}, C{PointC}");
 			base.Info(e);
 		}
 	}
